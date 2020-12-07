@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../:\Users\timot\IdeaProjects\Fix-me\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+/.name
+/compiler.xml
+/jarRepositories.xml
+/misc.xml
+/vcs.xml
