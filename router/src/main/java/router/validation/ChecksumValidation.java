@@ -23,12 +23,11 @@ public class ChecksumValidation {
             action = WhoIsResponsible.DESTINATION;
         new Send().sendMessage(attach, action);
     }
-    private int getMsgSize(String[] datum)
-    {
+
+    private int getMsgSize(String[] datum) {
         int j = 0;
         char[] t;
-        for(int k = 0; k < datum.length - 1; k++)
-        {
+        for(int k = 0; k < datum.length - 1; k++) {
             t = datum[k].toCharArray();
             for (char c : t) {
                 j += c;
@@ -37,20 +36,19 @@ public class ChecksumValidation {
         }
         return (j);
     }
-    private int getCheckSum(String part)
-    {
-        int tag, value;
-        try
-        {
-            String[] ops = part.split("=");
-            tag = Integer.parseInt(ops[0]);
-            value = Integer.parseInt(ops[1]);
-            if (tag == 10)
+
+    private int getCheckSum(String part) {
+        String tag;
+        int value;
+        try {
+            String[] strings = part.split("=");
+            tag = strings[0];
+            value = Integer.parseInt(strings[1]);
+            if (tag.equals("CS"))
                 return value;
         }
-        catch(Exception e)
-        {
-            System.out.println("Error message passed");
+        catch(Exception e) {
+            System.out.println("Error detected: checksum");
         }
         return (0);
     }
