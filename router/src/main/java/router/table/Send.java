@@ -23,9 +23,9 @@ public class Send {
         }
         try
         {
-            if (attachment.channel.isOpen() && RouterTable.getSize() > 1)
+            if (attachment.channel.isOpen() && RoutingTable.getSize() > 1)
             {
-                Attachment att = RouterTable.getClient(id);
+                Attachment att = RoutingTable.getClient(id);
                 if (att == null)
                 {
                     new Return().returnMessage(attachment, WhoIsResponsible.SOURCE);

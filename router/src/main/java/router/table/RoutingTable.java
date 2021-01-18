@@ -5,7 +5,7 @@ import router.server.Attachment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouterTable {
+public class RoutingTable {
     private static final List<Attachment> clients = new ArrayList<>();
 
     public static void addClient(Attachment client)

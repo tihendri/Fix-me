@@ -124,7 +124,7 @@ public class MessageHandler {
             }
             j += 1;
         }
-        return ("10="+ (j % 256) + startOfHeading);
+        return ("CS="+ (j % 256) + startOfHeading);
     }
 
     private static void setRequest() {

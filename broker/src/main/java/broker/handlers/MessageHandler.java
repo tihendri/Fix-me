@@ -32,7 +32,7 @@ public class MessageHandler {
             }
             j += 1;
         }
-        return ("10="+ (j % 256) + startOfHeading);
+        return ("CS="+ (j % 256) + startOfHeading);
     }
 
     public static String sellProduct(int receiver)
@@ -116,7 +116,7 @@ public class MessageHandler {
         }
         if (tag.equals("8") && state.equals("2"))
         {
-            System.out.println("\nMarket[" + Main.marketID +"] accepted order\n");
+            System.out.println("\nMarket[" + Main.marketID +"] executed order\n");
             return true;
         }
         return false;

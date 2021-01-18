@@ -1,7 +1,7 @@
 package router.server;
 
 import router.handlers.MessageHandler;
-import router.table.RouterTable;
+import router.table.RoutingTable;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Server implements Runnable {
     private final int currentPort;
-    private static int clientId = 1;
+    private static int uniqueClientId = 100000;
     public Server(int port) {
         currentPort = port;
     }
@@ -64,7 +64,7 @@ public class Server implements Runnable {
         Attachment attachment1 = new Attachment();
         attachment1.server = attachment.server;
         attachment1.channel = channel;
-        attachment1.channelId = clientId++;
+        attachment1.channelId = uniqueClientId++;
         attachment1.byteBuffer = ByteBuffer.allocate(2048);
         attachment1.toWriteMessage = false;
         attachment1.socketAddress = socketAddress;
@@ -72,7 +72,7 @@ public class Server implements Runnable {
         attachment1.messageHandler = messageHandler;
         attachment1.byteBuffer.put(data);
         attachment1.byteBuffer.flip();
-        RouterTable.addClient(attachment1);
+        RoutingTable.addClient(attachment1);
         channel.write(attachment1.byteBuffer, attachment1, messageHandler);
     }
 }

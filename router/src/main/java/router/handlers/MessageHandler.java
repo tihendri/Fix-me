@@ -1,7 +1,7 @@
 package router.handlers;
 
 import router.server.Attachment;
-import router.table.RouterTable;
+import router.table.RoutingTable;
 import router.server.WhoIsResponsible;
 import router.validation.ChecksumValidation;
 
@@ -22,10 +22,10 @@ public class MessageHandler implements CompletionHandler<Integer, Attachment> {
             try {
                 String port = attachment.server.getLocalAddress().toString().split(":")[1];
                 int port1 = Integer.parseInt(port);
-                System.out.format(getServerName(port1) + "stopped   listening to the   client %s%n",
+                System.out.format(getServerName(port1) + "stopped listening to the client %s%n",
                         attachment.socketAddress);
                 attachment.channel.close();
-                RouterTable.removeClient(attachment.channelId);
+                RoutingTable.removeClient(attachment.channelId);
             } catch (IOException ex) {
                 System.out.println("\n" + (char)27 + "[0;31mMarket or Broker has terminated their connection to Router." + (char)27 + "[0m");
 //                ex.printStackTrace();
@@ -40,8 +40,7 @@ public class MessageHandler implements CompletionHandler<Integer, Attachment> {
             attachment.byteBuffer.get(bytes, 0, limits);
             String msg = new String(bytes, StandardCharsets.UTF_8);
             attachment.message = msg.split(startOfHeading);
-            try
-            {
+            try {
                 String port = attachment.server.getLocalAddress().toString().split(":")[1];
 
                 int port1 = Integer.parseInt(port);
@@ -57,7 +56,7 @@ public class MessageHandler implements CompletionHandler<Integer, Attachment> {
             byte[] data = msg.getBytes(StandardCharsets.UTF_8);
             attachment.byteBuffer.put(data);
             attachment.byteBuffer.flip();
-            if (attachment.channel.isOpen() && RouterTable.getSize() > 1)
+            if (attachment.channel.isOpen() && RoutingTable.getSize() > 1)
                 new ChecksumValidation().checkingTheSum(attachment, WhoIsResponsible.CHECKSUM);
         } else {
             attachment.toWriteMessage = true;
